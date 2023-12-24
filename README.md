@@ -1,1 +1,3 @@
-# se3316-mkuzmaro-lab3
+# MEAN Stack Web App
+
+# Fully functional web application using a MEAN stack, JWT authentication, Rest API, and more!
