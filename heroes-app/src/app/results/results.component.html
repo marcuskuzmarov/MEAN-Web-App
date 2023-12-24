@@ -1,0 +1,11 @@
+<section class="results">
+    <h2 class="hero-name">{{ hero.name }}</h2>
+    <p class="hero-publisher">Publisher: {{ hero.publisher }}</p>
+    <a href="#" (click)="toggleDetails($event, hero)">
+        {{ showDetails ? 'Hide Details' : 'Show Details' }}
+    </a><br>
+    <div *ngIf="showDetails">
+        <app-details [selectedHero]="selectedHero"></app-details>
+    </div>
+    <a href="https://duckduckgo.com/?q={{hero.name}} by {{hero.publisher}}" target="_blank">See more on DuckDuckGo!</a>
+</section>

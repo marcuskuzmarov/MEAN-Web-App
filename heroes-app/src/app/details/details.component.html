@@ -1,0 +1,16 @@
+<section class="hero-details" *ngIf="showDetails">
+    <p>Gender: {{selectedHero?.gender}}</p>
+    <p>Eye color: {{selectedHero?.eyeColor}}</p>
+    <p>Race: {{selectedHero?.race}}</p>
+    <p>Hair color: {{selectedHero?.hairColor}}</p>
+    <p>Height: {{selectedHero?.height}}</p>
+    <p>Publisher: {{selectedHero?.publisher}}</p>
+    <p>Skin Color: {{selectedHero?.skinColor}}</p>
+    <p>Alignment: {{selectedHero?.alignment}}</p>
+    <p>Weight: {{selectedHero?.weight}}</p>
+    <h2>Powers:</h2>
+    <ul>
+        <li *ngFor="let power of selectedHero?.powers">{{power}}</li>
+    </ul>
+    <!-- <button type="button" (click)="toggleDetails()">Hide Details</button> -->
+</section>

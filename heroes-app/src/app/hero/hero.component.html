@@ -1,0 +1,13 @@
+<section class="search">
+    <app-search></app-search>
+
+</section>
+
+<section class="hero-listing">
+
+    <app-results
+        *ngFor="let hero of this.heroService.heroList"
+        [hero]="hero">
+    </app-results>
+
+</section>

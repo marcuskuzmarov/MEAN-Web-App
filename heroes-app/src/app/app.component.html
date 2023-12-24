@@ -1,0 +1,15 @@
+<main>
+  <div class="title">
+    <h1>{{title}}</h1>
+    <h6 *ngIf="this.userService.currentUser?.userType === 'admin'">SM Privileges</h6>
+  </div>
+    <section class="site-functionality">
+      <router-outlet></router-outlet>
+    </section>
+
+  <div class="policy dmca" >
+    <a *ngIf="router.url !== '/privacy'" class="policy-link" routerLink="/privacy">Security & Privacy Policy</a>
+    <a *ngIf="router.url !== '/dmca'" class="policy-link" routerLink="/dmca">DMCA Notice & Takedown</a>
+    <a *ngIf="router.url !== '/acc-use'" class="policy-link" routerLink="/acc-use">Acceptable Use Policy</a>
+  </div>
+</main>

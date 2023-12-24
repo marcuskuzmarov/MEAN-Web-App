@@ -1,0 +1,35 @@
+<section class="account">
+    <h4 class="account title">Enter your details below to create an account...</h4>
+    <form class="account form" [formGroup]="createAccountForm" (input)="clearInput()" (submit)="createAccount()">
+        <input type="text" formControlName="username" required placeholder="Nickname..."><br>
+        <input type="email" formControlName="email" placeholder="Email..."><br>
+        <input type="password" formControlName="password" placeholder="Password..."><br>
+        <input type="password" formControlName="confPass" placeholder="Confirm Password..."><br>
+
+        <!-- <div *ngIf="email.invalid">
+            <div *ngIf="email.errors?.required">Email is required...</div>
+            <div *ngIf="email.errors?.email">Email is invalid...</div>
+        </div> -->
+
+        <div *ngIf="this.createAccountForm.value.username == '' || this.createAccountForm.value.email == '' || this.createAccountForm.value.password == '' || this.createAccountForm.value.password == ''">
+            <p>All fields are required!</p>
+        </div>
+
+        <div *ngIf="this.createAccountForm.value.email != '' && !this.userService.validateEmail(this.createAccountForm.value.email)">
+            <p>Please enter a valid email!</p>
+        </div>
+    
+        <div *ngIf="this.createAccountForm.value.password !== this.createAccountForm.value.confPass">
+            <p>Passwords do not match!</p>
+        </div>
+
+        <p>{{ errorMessages }}</p>
+
+        <button id="create-acc-btn" class="account submit" type="submit" [disabled]="this.createAccountForm.value.username == '' || this.createAccountForm.value.email == '' || this.createAccountForm.value.email == '' || this.createAccountForm.value.password == '' || this.createAccountForm.value.confPass == '' || !this.userService.validateEmail(this.createAccountForm.value.email) || (this.createAccountForm.value.password !== this.createAccountForm.value.confPass)">Create Account</button>
+
+
+    </form>
+
+
+    <a class="account got" [routerLink]="['/login']">Already have an account? Login here!</a>
+</section>

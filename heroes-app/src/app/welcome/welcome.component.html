@@ -1,0 +1,13 @@
+<section class="welcome">
+    <h2 class="welcome title">Welcome to the superheroes app!</h2>
+    <p class="welcome text">This site allows you to search through our database of superheroes, browse through premade lists, and even create your own!</p>
+    <p class="welcome text" [innerHTML]="message"></p>
+    <div class="welcome nav" *ngIf="!this.userService.currentUser">
+        <button class="welcome nav login" type="button" [routerLink]="['/login']">Login here!</button>
+        <button class="welcome nav create" type="button" [routerLink]="['/register']">Create an account here!</button>
+        <button class="welcome nav guest" type="button" [routerLink]="['/search']">Browse as guest!</button>
+    </div>
+    <div class="welcome nav"*ngIf="this.userService.currentUser">
+        <button class="welcome nav start" type="button" (click)=start()>Superheroes Start!</button>
+    </div>
+</section>

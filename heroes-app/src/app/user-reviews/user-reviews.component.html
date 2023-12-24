@@ -1,0 +1,7 @@
+<section class="review users">
+    <h2 class="list-name">List {{ review.lName }} by {{ review.owner }}</h2>
+    <h2 class="user-name">Review By: {{ review.username }}</h2>
+    <p class="rating">Rating: {{ review.rating }}</p>
+    <p class="comment">Comment: {{ review.comment }}</p>
+    <p class="review-visible">Visible: <input type="checkbox" [checked]="review.visible" (change)="toggleVisible()"></p>
+</section>

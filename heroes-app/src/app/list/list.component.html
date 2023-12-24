@@ -1,0 +1,28 @@
+<div class="listform">
+    <h3 class="public-lists title">User Lists</h3>
+    <form class="list form" [formGroup]="listForm" (submit)="newList()">
+        <label>User Lists: </label>
+        <select class="search list drop" id="listDrop" formControlName="listDrop" value="Select A List" (change)="getList()">
+            <option disabled>Select A List</option>
+            <option *ngFor="let lName of this.lNames" value="{{lName}}">{{lName}}</option>
+        </select>
+        <!-- <button id="selectListBtn" type="button" (click)="getList()">Select</button> -->
+        <label> Public: <input type="checkbox" [checked]="listPublic" [disabled]="this.listForm.value.listDrop === 'Select A List'" (change)="updateVisibility()"></label>
+        <input id="listName" type="text" formControlName="lName" maxlength="20" placeholder="Enter List Name..." value="">
+        <input id="listDesc" type="text" formControlName="lDesc" maxlength="40" placeholder="Enter List Description..." value="">
+        <button id="newListBtn" type="submit" [disabled]="this.heroService.heroList.length === 0">New List</button>
+        <button id="saveListBtn" type="button" (click)="saveList()" [disabled]="this.listForm.value.listDrop === 'Select A List'">Save List</button>
+        <button [hidden]="confDel" id="deleteListBtn" type="button" (click)="chooseDelete()" [disabled]="this.listForm.value.listDrop === 'Select A List'">Delete</button>
+        <button [hidden]="!confDel" type="button" (click)="deleteList()">Confirm Delete</button>
+        <button [hidden]="!confDel" type="button" (click)="chooseDelete()">Cancel Delete</button>
+        
+        <!-- <select class="search list drop"id="sortDrop" formControlName="sortDrop" value="Sort By">
+            <option disabled selected>Sort By</option>
+            <option value="name">Name</option>
+            <option value="race">Race</option>
+            <option value="publisher">Publisher</option>
+            <option value="powers">Powers</option>
+        </select>
+        <button id="sortListBtn" type="button" (click)="sortResults()">Sort</button> -->
+    </form>
+</div>

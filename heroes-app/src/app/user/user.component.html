@@ -1,0 +1,6 @@
+<section class="admin users">
+    <h2 class="user-name">{{ user.username }}</h2>
+    <!-- <p class="user-email">Email: {{ user.email }}</p> -->
+    <p class="user-type">Admin: <input type="checkbox" [disabled]="user.email == 'mkuzmaro@uwo.ca' || user.email === this.userService.currentUser?.email" [checked]="user.userType === 'admin'" (change)="toggleAdmin()"></p>
+    <p class="user-active">Active: <input type="checkbox" [disabled]="user.email == 'mkuzmaro@uwo.ca' || user.email === this.userService.currentUser?.email" [checked]="user.active === true" (change)="toggleActive()"></p>
+</section>

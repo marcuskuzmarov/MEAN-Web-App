@@ -1,0 +1,17 @@
+<section class="reviews">
+
+    <br>
+    <h1>Reviews:</h1>
+
+    <p *ngFor="let review of this.heroService.reviewList">{{review.username}} rated {{review.rating}}/5, Comment: {{review.comment}}</p>
+
+    <form [formGroup]="reviewForm" (submit)="saveReview()"><br>
+        <label for="rating">Rating: </label>
+        <input type="number" formControlName="rating" min="0" max="5" (keyup)="validateRating()">
+        <input type="text" formControlName="review" maxlength="50" placeholder="Enter Comment...">
+        <button id="publicBtn" type="submit" >Submit Review</button>
+        <h1>{{reviewMsg}}</h1>
+    </form>
+
+
+</section>

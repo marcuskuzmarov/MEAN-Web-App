@@ -1,0 +1,58 @@
+<main>
+    <div class="title">
+        <h3 class="search title">Search For a Hero!</h3>
+    </div>
+    <div class="search-public">
+        <div class="search">
+            <form class="form" [formGroup]="searchForm" (submit)="submitSearch()">
+                <input id="searchName" formControlName="searchName" type="text" maxlength="20"
+                    placeholder="Enter Name..." #filter>
+                <input id="searchRace" formControlName="searchRace" type="text" maxlength="20"
+                    placeholder="Enter Race...">
+                <input id="searchPublisher" formControlName="searchPublisher" type="text" maxlength="20"
+                    placeholder="Enter Publisher..."><br>
+                <!-- <input id="searchPower" type="text" formControlName="searchPowers" maxlength="20"
+                    placeholder="Enter Powers..."> -->
+                <label for="powers">Select a Power: </label>
+                <select id="searchPower" formControlName="searchPowers" name="powers">
+                    <option disabled selected>None</option>
+                    <option *ngFor="let power of this.powersList" value="{{power}}">{{power}}</option>
+                </select>
+                <input id="searchLimit" type="number" formControlName="searchLimit" min="1"
+                    placeholder="Enter Search Limit...">
+                <button id="searchBtn" type="submit" [disabled]="this.searchForm.value.searchName === '' && this.searchForm.value.searchRace === '' && this.searchForm.value.searchPublisher === ''">Search</button>
+                <!-- <button type="button" (click)="changePassword()">Change Password</button> -->
+            </form>
+        </div>
+
+        <div class="public-lists">
+            <h3 class="">Public Lists</h3>
+            <form class="listform" [formGroup]="publicForm">
+                <select class="search list drop" id="listDrop" formControlName="listDrop" value="Select A List" (change)="getPublicList()">
+                    <option disabled>Select A List</option>
+                    <option *ngFor="let list of this.heroService.publicLists" value="{{list.lName}},{{list.owner}}">{{list.lName}} by {{list.owner}}, {{list.ids.length}} Heroes, Average Rating: {{list.avgRating}}</option>
+                </select>
+                <app-review *ngIf="this.userService.currentUser && this.publicForm.value.listDrop !== 'Select A List'"></app-review>
+                <!-- <button id="publicBtn" type="submit" [disabled]="this.publicForm.value.listDrop === 'Select A List'">Select List</button> -->
+            </form>
+        </div>
+    </div>
+
+    <app-list *ngIf="this.userService.currentUser"></app-list>
+
+    <div class="logout">
+        <button class="search list button" id="backBtn" routerLink="/">Back</button>
+        <button class="search list button" id="logoutBtn" (click)="logout()"
+            *ngIf="this.userService.currentUser">Logout</button><br>
+        <button class="search list button" id="loginBtn" routerLink="/login"
+            *ngIf="!this.userService.currentUser">Login</button>
+        <button class="search list button" id="registerBtn" routerLink="/update-pass"
+            *ngIf="this.userService.currentUser">Change Password</button>
+    </div>
+
+    <div class="admin-back" *ngIf="this.userService.currentUser?.userType === 'admin'">
+        <button class="search list button" id="adminBtn" [routerLink]="['/admin']">Admin Hub</button>
+    </div>
+
+    <h1>{{matchMsg}}</h1>
+</main>

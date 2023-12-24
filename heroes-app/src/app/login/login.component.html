@@ -1,0 +1,26 @@
+<section class="login">
+    <h4 class="login title">Enter your details below to login...</h4>
+    <form class="login form" [formGroup]="loginForm" (submit)="login()">
+        <input type="email" formControlName="email" (input)="clearInput()" required placeholder="Email..."><br>
+        <input type="password" formControlName="password" (input)="clearInput()" placeholder="Password..."><br>
+        <div *ngIf="this.loginForm.value.username === '' || this.loginForm.value.password === ''">
+            <p>All fields are required!</p>
+        </div>
+
+        <div *ngIf="this.loginForm.value.email != '' && !this.userService.validateEmail(this.loginForm.value.email)">
+            <p>Please enter a valid email!</p>
+        </div>
+
+        <div *ngIf="this.loginForm.value.username != '' && this.loginForm.value.password != ''">
+            <p>{{errorMessages}}</p>
+            <a href={{emailAddr}} (click)="resendEmail($event)">{{emailMsg}}</a>
+        </div>
+    
+        <button [disabled]="this.loginForm.value.username === '' || this.loginForm.value.password === '' || !this.userService.validateEmail(this.loginForm.value.email)" class="login submit" id="login-btn" type="submit">Login</button>
+
+        <a class="login not" [routerLink]="['/register']">Not signed up? Register here!</a>
+
+    </form>
+
+
+</section>

@@ -1,0 +1,84 @@
+<section *ngIf="this.userService.currentUser?.userType === 'admin'">
+    <div class="admin controls">
+        <h1 class="admin title">Admin Hub</h1>
+        <div class="admin nav">
+            <button class="admin nav home" [routerLink]="['']">Home</button>
+            <button class="admin nav users" type="button" (click)="toggleUsers()">{{ showUsers ? 'Hide Users' : 'Show
+                Users' }}</button>
+            <button class="admin nav reviews" type="button" (click)="toggleReviews()">{{ showReviews ? 'Hide Reviews' :
+                'Show Reviews' }}</button>
+            <button class="admin nav add" type="button" (click)="togglePriv()">{{ showPriv ? 'Hide Security & Privacy
+                Policy' : 'Show Security & Privacy Policy' }}</button>
+            <button class="admin nav add" type="button" (click)="toggleDMCA()">{{ showDMCA ? 'Hide DMCA Notice &
+                Takedown' : 'Show DMCA Notice & Takedown' }}</button>
+            <button class="admin nav add" type="button" (click)="toggleAccUse()">{{ showAccUse ? 'Hide Acceptable Use
+                Policy' : 'Show Acceptable Use Policy' }}</button>
+            <button class="admin nav search" type="button" routerLink="/search">Search</button>
+            <button class="admin nav logout" (click)="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div *ngIf="showUsers" class="listing">
+        <app-user *ngFor="let user of this.userService.userList" [user]="user">
+        </app-user>
+    </div>
+
+    <div *ngIf="showReviews" class="listing">
+        <app-user-reviews *ngFor="let review of this.heroService.reviewList" [review]="review"></app-user-reviews>
+    </div>
+
+    <div *ngIf="showReviews">
+        <h2 *ngIf="this.heroService.reviewList.length === 0">No Reviews!</h2>
+    </div>
+
+    <div *ngIf="showPriv" class="policy">
+        <textarea class="privacy" [(ngModel)]="privPol"></textarea><br>
+        <button class="admin" type="button" (click)="updatePriv()">Update</button>
+    </div>
+
+    <div *ngIf="showDMCA" class="policy">
+        <textarea class="privacy" [(ngModel)]="dmcaPol"></textarea><br>
+        <button class="admin" type="button" (click)="updateDMCA()">Update</button><br>
+
+        <h1>DMCA Reports</h1>
+        <p>Please fill out the provided information whenever a DMCA notice or takedown is received.</p>
+        <p>Please hide the review in question from the site if the report is approved.</p><br>
+
+
+        <form [formGroup]="dmcaForm" (submit)="submitDMCA()">
+            <select formControlName="reviewDrop" (change)="getDMCAReports()">
+                <option selected disabled>Select A Review</option>
+                <option *ngFor="let review of this.reviewList" value="{{ review.lName }},{{ review.owner }},{{review.username }}">{{ review.lName }} by {{ review.owner }}, Review by: {{review.username }}</option>
+            </select><br>
+
+            <br><h3>DMCA Log:</h3>
+            <div *ngIf="this.dmcaForm.value.reviewDrop !== 'Select A Review'">
+                <div *ngIf="this.dmcaReports.length > 0">
+                    <p *ngFor="let dmca of this.dmcaReports">Date Request Received: {{ dmca.dateReqRcvd }}, Date Notice Sent: {{ dmca.dateNotSent }}, Date Dispute Received: {{ dmca.dateDisRcvd }}, Notes: {{ dmca.notes }}, Status: {{ dmca.status }}</p>
+                </div>
+                <h5 *ngIf="this.dmcaReports.length === 0">No Reports!</h5>
+                <br>
+                <h1>New DMCA:</h1>
+                <label for="dmca">Date Request Received:</label>
+                <input type="date" formControlName="dateReqRcvd">
+                <label for="dmca">Date Notice Sent:</label>
+                <input type="date" formControlName="dateNotSent">
+                <label for="dmca">Date Dispute Received:</label>
+                <input type="date" formControlName="dateDisRcvd"><br>
+                <input type="text" formControlName="notes" placeholder="Enter notes...">
+                <label for="dmca">Status:</label>
+                <select formControlName="status">
+                    <option selected value="Active">Active</option>
+                    <option value="Processed">Processed</option>
+                </select><br>
+                <button type="submit">Submit DMCA</button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="showAccUse" class="policy">
+        <textarea class="privacy" [(ngModel)]="accUsePol"></textarea><br>
+        <button class="admin" type="button" (click)="updateAccUse()">Update</button>
+    </div>
+
+</section>

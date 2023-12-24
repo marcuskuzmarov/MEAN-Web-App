@@ -1,0 +1,18 @@
+<section class="update-pass">
+    <h4 class="update-pass title">Enter new password...</h4>
+    <form class="update-pass form" [formGroup]="updatePassForm" (submit)="updatePass()">
+        <input type="password" formControlName="password" required placeholder="Password"><br>
+        <input type="password" formControlName="confPass" placeholder="Confirm Password"><br>
+        
+        <div *ngIf="this.updatePassForm.value.password == '' || this.updatePassForm.value.confPass == ''">
+            <p>All fields are required!</p>
+        </div>
+
+        <div *ngIf="this.updatePassForm.value.password !== this.updatePassForm.value.confPass">
+            <p>Passwords do not match!</p>
+        </div>
+
+        <button [disabled]="this.updatePassForm.value.password == '' || this.updatePassForm.value.confPass == '' || this.updatePassForm.value.password !== this.updatePassForm.value.confPass"
+            class="update-pass submit" id="update-pass-btn" type="submit">Update Password</button>
+    </form>
+</section>

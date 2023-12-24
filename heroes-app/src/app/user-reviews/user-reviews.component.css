@@ -1,0 +1,15 @@
+.review {
+    background: var(--primary-color);
+    border-radius: 30px;
+    /* padding-bottom: 30px; */
+}
+.user-name {
+    color: white;
+    padding: 10px 20px 0 20px;
+}
+/* .user-email {
+    padding: 10px 20px 20px 20px;
+}
+.user-type {
+    padding: 10px 20px 20px 0;
+} */
