@@ -12,7 +12,7 @@ const transporter = require('./tokenSender');
 const app = express();
 
 // mongodb url
-const dbURI = '' // removed URI for privacy
+const dbURI = 'mongodb+srv://mkuzmaro:mkuzmaro1357@lab3.3xn6uiv.mongodb.net/superheroes?retryWrites=true&w=majority' // removed URI for privacy
 // collections in mongodb
 const Infos = require('./models/infos');
 const Powers = require('./models/powers');
